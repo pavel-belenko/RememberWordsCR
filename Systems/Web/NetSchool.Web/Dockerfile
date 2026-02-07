@@ -9,7 +9,7 @@ RUN dotnet build "./Systems/Web/NetSchool.Web/NetSchool.Web.csproj" -c Release -
 FROM build AS publish
 RUN dotnet publish "./Systems/Web/NetSchool.Web/NetSchool.Web.csproj" -c Release -o /app/publish
 
-FROM nginx:alpine AS final
+FROM nginx:1.29.5-alpine3.23 AS final
 WORKDIR /usr/share/nginx/html
 COPY --from=publish /app/publish/wwwroot .
 COPY nginx.conf /etc/nginx/nginx.conf
